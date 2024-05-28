@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <meta name="author" content="Brian Shifoko">
+</head>
+<body>
+<div class="container">
+    <div class="sidebar">
+        <div class="profile">
+            <img src="profile.jpg" alt="Profile Picture" id="profilePic">
+            <input type="file" id="uploadProfilePic" accept="image/*" style="display: none;">
+            <h2 id="username" onclick="openChangeNameModal()">User</h2>
+        </div>
+        <ul>
+            <li onclick="showAlert('Templates')">Templates</li>
+            <li onclick="showDeletedTasks()">Deleted Tasks</li>
+            <li>Categories</li>
+            <li onclick="showAnalytics()">Analytics</li>
+        </ul>
+        <div class="consistency">
+            <p>Goal</p>
+            <p class="highlight">Consistency</p>
+            <div class="consistency-bar" id="consistencyBar">
+                <div class="consistency-fill" id="consistencyFill"></div>
+            </div>
+        </div>
+    </div>
+    <div class="main-content">
+        <header>
+            <h1 id="greeting"></h1>
+        </header>
+        <div class="categories" id="categories">
+            <div class="category business">
+                <h3>Business</h3>
+                <p id="businessTaskCount">0 tasks</p>
+            </div>
+            <div class="category personal">
+                <h3>Personal</h3>
+                <p id="personalTaskCount">0 tasks</p>
+            </div>
+            <div class="category fitness">
+                <h3>Fitness</h3>
+                <p id="fitnessTaskCount">0 tasks</p>
+            </div>
+            <div class="category education">
+                <h3>Education</h3>
+                <p id="educationTaskCount">0 tasks</p>
+            </div>
+        </div>
+        <button class="add-category-button" onclick="openAddCategoryModal()">Add Category</button>
+        <div class="today-tasks">
+            <h2>Today's Tasks</h2>
+            <ul id="taskList">
+                <!-- Tasks will be added here dynamically -->
+            </ul>
+            <button class="add-task-button" onclick="openAddTaskModal()">+</button>
+        </div>
+        <div class="today-tasks">
+            <h2>Completed Tasks</h2>
+            <ul id="completedTaskList">
+                <!-- Completed tasks will be added here dynamically -->
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Add Task Modal -->
+<div id="addTaskModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeAddTaskModal()">&times;</span>
+        <h2>Add New Task</h2>
+        <label for="taskCategory">Category:</label>
+        <select id="taskCategory">
+            <option value="business">Business</option>
+            <option value="personal">Personal</option>
+            <option value="fitness">Fitness</option>
+            <option value="education">Education</option>
+        </select>
+        <label for="taskName">Task:</label>
+        <input type="text" id="taskName">
+        <button onclick="addTask()">Add Task</button>
+    </div>
+</div>
+
+<!-- Add Category Modal -->
+<div id="addCategoryModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeAddCategoryModal()">&times;</span>
+        <h2>Add New Category</h2>
+        <label for="newCategoryName">Category Name:</label>
+        <input type="text" id="newCategoryName">
+        <button onclick="addCategory()">Add Category</button>
+    </div>
+</div>
+
+<!-- Change Name Modal -->
+<div id="changeNameModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeChangeNameModal()">&times;</span>
+        <h2>Change Name</h2>
+        <label for="newUserName">New Name:</label>
+        <input type="text" id="newUserName">
+        <button onclick="changeUserName()">Change Name</button>
+    </div>
+</div>
+
+<!-- Deleted Tasks Modal -->
+<div id="deletedTasksModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeDeletedTasksModal()">&times;</span>
+        <h2>Deleted Tasks</h2>
+        <ul id="deletedTaskList">
+            <!-- Deleted tasks will be listed here -->
+        </ul>
+    </div>
+</div>
+
+<!-- Name Inquiry Modal -->
+<div id="nameInquiryModal" class="modal">
+    <div class="modal-content">
+        <h2>Welcome!</h2>
+        <p>Please enter your name:</p>
+        <input type="text" id="userNameInput">
+        <button onclick="saveUserName()">Submit</button>
+    </div>
+</div>
+
+<!-- Analytics Modal -->
+<div id="analyticsModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeAnalyticsModal()">&times;</span>
+        <h2>Analytics</h2>
+        <div>
+            <h3>Task Completion Rate:</h3>
+            <p id="completionRate">0%</p>
+        </div>
+        <div>
+            <h3>Total Tasks:</h3>
+            <p id="totalTasks">0</p>
+        </div>
+        <div>
+            <h3>Completed Tasks:</h3>
+            <p id="completedTasks">0</p>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
