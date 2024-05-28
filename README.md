@@ -1,5 +1,7 @@
 # Task Management App
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/66c50e6c-d642-47ec-961e-a620b882b69a/deploy-status)](https://app.netlify.com/sites/brian-shifoko-task-management-app/deploys)
+
 This is a task management application that helps you organize your tasks into categories, mark them as completed, delete them, and view analytics.
 
 ## Features
