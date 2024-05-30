@@ -4,11 +4,18 @@
 
 This is a task management application that helps you organize your tasks into categories, mark them as completed, delete them, and view analytics.
 
+## To run the project
+[Task Management App](https://brian-shifoko-task-management-app.netlify.app/)
+
 ## Features
 
 - **Task Management**: Add, complete, and delete tasks.
 - **Category Management**: Create and delete task categories.
 - **Analytics**: View overall task statistics and completion rates.
+
+## Screenshots
+
+![Task Management App Screenshot](image/Task%20Management%20Screenshot.png) 
 
 ## Technologies Used
 
@@ -22,8 +29,9 @@ This is a task management application that helps you organize your tasks into ca
 1. **Clone the repository:**
  ```bash
    git clone https://github.com/BrianShifoko/Task-Management-App.git
-   cd Task-Management-App
 ```
+cd Task-Management-App
+
 2. **Open the project:**
 Open the index.html file in your web browser.
 
@@ -51,10 +59,6 @@ Click on "Analytics" to view statistics about your tasks.
 - Managing Categories:
 Add a new category by entering its name in the modal.
 Delete a category using the "Delete" button next to it.
-
-## Screenshots
-
-![Calculator Screenshot](image/Task%20Management%20App%20Screenshot.png)
 
 ## Author
 

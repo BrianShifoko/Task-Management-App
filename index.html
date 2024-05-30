@@ -4,20 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Management App</title>
+    <link rel="icon" href="image/Time management icon.png" >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <meta name="author" content="Brian Shifoko">
 </head>
 <body>
 <div class="container">
-    <div class="sidebar">
+    <div class="sidebar" id="sidebar">
         <div class="profile">
             <img src="profile.jpg" alt="Profile Picture" id="profilePic">
             <input type="file" id="uploadProfilePic" accept="image/*" style="display: none;">
             <h2 id="username" onclick="openChangeNameModal()">User</h2>
         </div>
         <ul>
-            <li onclick="showAlert('Templates')">Templates</li>
+            <li onclick="showAlert('Templates are coming soon!')">Templates</li>
             <li onclick="showDeletedTasks()">Deleted Tasks</li>
             <li>Categories</li>
             <li onclick="showAnalytics()">Analytics</li>
@@ -32,6 +33,7 @@
     </div>
     <div class="main-content">
         <header>
+            <button class="toggle-sidebar" onclick="toggleSidebar()">&#9776;</button>
             <h1 id="greeting"></h1>
         </header>
         <div class="categories" id="categories">
@@ -56,14 +58,14 @@
         <div class="today-tasks">
             <h2>Today's Tasks</h2>
             <ul id="taskList">
-                <!-- Tasks will be added here dynamically -->
+                <!-- Tasks will be added here -->
             </ul>
             <button class="add-task-button" onclick="openAddTaskModal()">+</button>
         </div>
         <div class="today-tasks">
             <h2>Completed Tasks</h2>
             <ul id="completedTaskList">
-                <!-- Completed tasks will be added here dynamically -->
+                <!-- Completed tasks will be added here  -->
             </ul>
         </div>
     </div>

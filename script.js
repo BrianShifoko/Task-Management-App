@@ -20,17 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelector('#nameInquiryModal button').addEventListener('click', saveUserName);
     document.querySelector('#changeNameModal button').addEventListener('click', changeUserName);
-    document.querySelector('ul li:nth-child(1)').addEventListener('click', () => {
-        showAlert('Templates are coming soon!');
-    });
     
-
-    window.onclick = function(event) {
-        if (event.target.classList.contains('modal')) {
-            event.target.style.display = "none";
-        }
-    };
-
     document.getElementById('profilePic').addEventListener('click', () => {
         document.getElementById('uploadProfilePic').click();
     });
@@ -56,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateTime();
             setInterval(updateTime, 1000); // 
         } else {
-            alert('Please enter a valid name.');
+            showAlert('Please enter a valid name.');
         }
     }
 
@@ -68,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('changeNameModal').style.display = 'none';
             updateGreeting();
         } else {
-            alert('Please enter a valid name.');
+            showAlert('Please enter a valid name.');
         }
     }
 
@@ -164,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateCategoryTaskCount(category); 
             updateAnalytics(); 
         } else {
-            alert('Please enter a valid task.');
+            showAlert('Please enter a valid task.');
         }
     }
     
@@ -207,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('newCategoryName').value = '';
             closeAddCategoryModal();
         } else {
-            alert('Please enter a valid category name.');
+            showAlert('Please enter a valid category name.');
         }
     }
 
@@ -230,8 +220,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('analyticsModal').style.display = 'block';
     }
     
-    
-
     window.addTask = addTask;
     window.addCategory = addCategory;
     window.showAnalytics = showAnalytics;
@@ -250,4 +238,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.showAlert = showAlert;
+
+    
+    const sidebarToggle = document.querySelector('.toggle-sidebar');
+    const sidebar = document.getElementById('sidebar');
+
+    sidebarToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('show');
+    });
+
+    
+    document.addEventListener('click', (event) => {
+        if (!event.target.closest('.sidebar') && sidebar.classList.contains('show') && !event.target.closest('.toggle-sidebar')) {
+            sidebar.classList.remove('show');
+        }
+    });
+
+    
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768 && sidebar.classList.contains('show')) {
+            sidebar.classList.remove('show');
+        }
+    });
+
+    
+    if (window.innerWidth <= 768) {
+        sidebar.classList.remove('show');
+    } else {
+        sidebar.classList.add('show');
+    }
 });
+
