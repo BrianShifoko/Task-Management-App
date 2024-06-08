@@ -541,14 +541,14 @@ header h1 {
 }
 
 #deletedTasksModal li {
-  margin-bottom: 8px; /* Space between each item */
+  margin-bottom: 8px; 
   padding: 8px;
   border: 1px solid #ccc;
   background-color: #fff;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3); /* Increased shadow for 3D effect */
-  transition: background-color 0.3s ease; /* Smooth transition for background color change */
+  box-shadow: 0 0 10px rgba(0,0,0,0.3); 
+  transition: background-color 0.3s ease; 
   font-size: 12px; 
 }
 #deletedTasksModal li:hover {
-  background-color: #ffcccc; /* Pink color on hover */
+  background-color: #ffcccc; 
 }
