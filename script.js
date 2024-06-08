@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const deletedTaskList = document.getElementById('deletedTaskList');
     const consistencyFill = document.getElementById('consistencyFill');
     const consistencyBar = document.getElementById('consistencyBar');
+    const undoMessage = document.getElementById('undoMessage');
+
+    let lastDeletedTask = null;
 
     if (!localStorage.getItem('userName')) {
         nameInquiryModal.style.display = 'block';
@@ -44,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
             nameInquiryModal.style.display = 'none';
             updateGreeting();
             updateTime();
-            setInterval(updateTime, 1000); // 
+            setInterval(updateTime, 1000); 
         } else {
             showAlert('Please enter a valid name.');
         }
@@ -91,7 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentGreeting = greetingElement.textContent.split(' It\'s')[0]; 
         greetingElement.textContent = `${currentGreeting} It's ${time}.`; 
     }
-    
 
     function updateConsistency() {
         const taskListItems = document.querySelectorAll('#taskList li');
@@ -109,9 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             consistencyFill.classList.add('animate-consistency');
         }
-        
     }
-    
 
     function addTask() {
         const category = taskCategorySelect.value;
@@ -127,21 +127,26 @@ document.addEventListener('DOMContentLoaded', () => {
             taskActions.classList.add('task-actions');
             const doneBtn = document.createElement('div');
             doneBtn.classList.add('done-btn');
+            doneBtn.innerHTML = '<i class="fas fa-check"></i>';
             doneBtn.onclick = () => {
                 li.classList.add('completed');
                 document.getElementById('completedTaskList').appendChild(li);
+                lastDeletedTask = { element: li, category: category };
                 updateConsistency();
                 updateCategoryTaskCount(category); 
                 updateAnalytics(); 
+                showUndoMessage();
             };
             const deleteBtn = document.createElement('button');
             deleteBtn.textContent = 'Delete';
             deleteBtn.onclick = () => {
                 li.classList.add('deleted-task');
                 deletedTaskList.appendChild(li);
+                lastDeletedTask = { element: li, category: category };
                 updateConsistency();
                 updateCategoryTaskCount(category); 
                 updateAnalytics(); 
+                showUndoMessage();
             };
             taskActions.appendChild(doneBtn);
             taskActions.appendChild(deleteBtn);
@@ -157,13 +162,33 @@ document.addEventListener('DOMContentLoaded', () => {
             showAlert('Please enter a valid task.');
         }
     }
-    
+
+    function showUndoMessage() {
+        undoMessage.style.display = 'block';
+        setTimeout(() => {
+            undoMessage.style.display = 'none';
+        }, 5000);
+    }
+
+    window.undoLastAction = function() {
+        if (lastDeletedTask) {
+            const taskElement = lastDeletedTask.element;
+            const category = lastDeletedTask.category;
+            taskElement.classList.remove('completed', 'deleted-task');
+            document.getElementById('taskList').appendChild(taskElement);
+            updateConsistency();
+            updateCategoryTaskCount(category);
+            updateAnalytics();
+            lastDeletedTask = null;
+            undoMessage.style.display = 'none';
+        }
+    };
+
     function updateCategoryTaskCount(category) {
         const categoryTaskCountElement = document.getElementById(`${category}TaskCount`);
         const categoryTasksCount = document.querySelectorAll(`#taskList .${category}`).length;
         categoryTaskCountElement.textContent = `${categoryTasksCount} tasks`;
     }
-    
 
     function addCategory() {
         const categoryName = document.getElementById('newCategoryName').value.trim();
@@ -219,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
         document.getElementById('analyticsModal').style.display = 'block';
     }
-    
+
     window.addTask = addTask;
     window.addCategory = addCategory;
     window.showAnalytics = showAnalytics;
@@ -239,7 +264,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.showAlert = showAlert;
 
-    
     const sidebarToggle = document.querySelector('.toggle-sidebar');
     const sidebar = document.getElementById('sidebar');
 
@@ -247,25 +271,21 @@ document.addEventListener('DOMContentLoaded', () => {
         sidebar.classList.toggle('show');
     });
 
-    
     document.addEventListener('click', (event) => {
         if (!event.target.closest('.sidebar') && sidebar.classList.contains('show') && !event.target.closest('.toggle-sidebar')) {
             sidebar.classList.remove('show');
         }
     });
 
-    
     window.addEventListener('resize', () => {
         if (window.innerWidth > 768 && sidebar.classList.contains('show')) {
             sidebar.classList.remove('show');
         }
     });
 
-    
     if (window.innerWidth <= 768) {
         sidebar.classList.remove('show');
     } else {
         sidebar.classList.add('show');
     }
 });
-
