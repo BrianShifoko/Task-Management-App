@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Management App</title>
-    <link rel="icon" href="image/Time management icon.png" >
+    <link rel="icon" href="image/Time management icon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <meta name="author" content="Brian Shifoko">
@@ -67,6 +67,9 @@
             <ul id="completedTaskList">
                 <!-- Completed tasks will be added here  -->
             </ul>
+        </div>
+        <div id="undoMessage" class="undo-message">
+            Undo uncompleted Task. <button onclick="undoLastAction()"><i class="fas fa-undo-alt"></i></button>
         </div>
     </div>
 </div>
